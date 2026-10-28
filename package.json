@@ -1,18 +1,23 @@
 {
-  "name": "study-mode-quiz",
+  "name": "project-course",
+  "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.15.0",
+      "onFail": "download"
+    }
+  },
   "scripts": {
-    "start": "pnpm --filter @platform/cli start",
-    "lint": "pnpm -r lint",
-    "typecheck": "pnpm -r typecheck",
-    "format:check": "prettier --check ."
+    "lint": "nx run-many -t lint",
+    "lint-typecheck": "nx run-many -t lint-typecheck",
+    "lint-eslint": "nx run-many -t lint-eslint",
+    "lint-prettier": "nx run-many -t lint-prettier",
+    "clean": "nx run-many -t clean && nx reset",
+    "start": "nx run quiz:start"
   },
   "devDependencies": {
-    "@eslint/js": "^9.24.0",
-    "eslint": "^9.24.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.0"
+    "nx": "^24.0.1"
   }
 }

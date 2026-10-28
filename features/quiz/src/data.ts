@@ -1,49 +1,51 @@
-import type { Outcome, Question } from "./play/types.ts"
+import { type Outcome, type Question, type Quiz } from "./lib/types.ts"
 
-export const outcomes: Outcome[] = [
+const outcomes: Outcome[] = [
   {
-    id: "focus",
-    title: "Deep Focus",
-    description: "A quiet plan helps you get into a steady flow.",
+    id: "spaghetti",
+    title: "Spaghetti",
+    description: "Classic and dependable, you keep things simple.",
   },
   {
-    id: "balance",
-    title: "Balanced Pace",
-    description: "You do your best with a mix of work and breaks.",
+    id: "penne",
+    title: "Penne",
+    description: "Practical and direct, you get things done.",
   },
   {
-    id: "recharge",
-    title: "Fresh Start",
-    description: "Rest and a clear reset help you feel ready.",
+    id: "farfalle",
+    title: "Farfalle",
+    description: "Playful and light, you like to go with the flow.",
   },
   {
-    id: "explore",
-    title: "Curious Mode",
-    description: "A new idea or place gives your day momentum.",
+    id: "ravioli",
+    title: "Ravioli",
+    description: "Full of surprises, you keep people guessing.",
   },
 ]
 
-export const quiz: Question[] = [
+const questions: Question[] = [
   {
     kind: "choice",
-    text: "What helps you begin a study session?",
+    label: "How do you like your Sunday?",
+    hint: "There is no wrong answer.",
     choices: [
-      { label: "A clear desk and a short list", outcome: "focus", points: 3 },
-      { label: "A timer with planned breaks", outcome: "balance", points: 2 },
-      { label: "A walk before I start", outcome: "recharge", points: 2 },
-      { label: "A fresh topic to explore", outcome: "explore", points: 3 },
+      { label: "Cooking for friends", outcome: "ravioli", points: 3 },
+      { label: "Reading with a blanket", outcome: "spaghetti", points: 1 },
+      { label: "A long walk", outcome: "penne", points: 2 },
     ],
   },
   {
     kind: "scale",
-    text: "How much do you like trying a new study method?",
-    low: "not much",
+    label: "How much do you enjoy trying new things?",
+    low: "not at all",
     high: "a lot",
-    outcome: "explore",
+    outcome: "farfalle",
   },
   {
     kind: "yesno",
-    text: "Do you usually plan your study time ahead?",
-    outcome: "focus",
+    label: "Do you plan trips in advance?",
+    outcome: "penne",
   },
 ]
+
+export const quiz: Quiz = { outcomes, questions }

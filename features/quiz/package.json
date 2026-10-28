@@ -2,21 +2,19 @@
   "name": "@platform/quiz",
   "version": "1.0.0",
   "type": "module",
-  "exports": {
-    "./data": "./src/data.ts",
-    "./play": "./src/play/index.ts",
-    "./saved": "./src/saved/index.ts",
-    "./outline": "./src/outline/index.ts",
-    "./package.json": "./package.json"
-  },
+  "main": "src/index.ts",
   "scripts": {
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "tsc",
+    "lint-prettier": "prettier --check .",
+    "lint-eslint": "eslint .",
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo",
+    "start": "node ."
   },
   "devDependencies": {
-    "eslint": "^9.24.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.0"
+    "@platform/tooling": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
   }
 }
