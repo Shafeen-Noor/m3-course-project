@@ -16,6 +16,7 @@ const session = new Session(quiz.outcomes)
 session.start()
 
 console.log("Study Mode Finder")
+console.log(`Hello, ${settings.name}`)
 console.log()
 
 for (const [index, question] of quiz.questions.entries()) {
@@ -24,10 +25,8 @@ for (const [index, question] of quiz.questions.entries()) {
 
   console.log(show(question, settings))
   console.log(recap(question, answer))
-  if (settings.showPoints) {
-    const label = result.points === 1 ? "point" : "points"
-    console.log(`${result.points} ${label} for ${result.outcome}`)
-  }
+  const label = result.points === 1 ? "point" : "points"
+  console.log(`${result.points} ${label} for ${result.outcome}`)
   console.log()
 }
 
@@ -39,6 +38,30 @@ const outline = buildOutline(quiz)
 console.log(`Suggested approach: ${result.title}`)
 console.log(result.description)
 console.log()
+console.log("You got this because:")
+for (const reason of session.explain()) {
+  console.log(`- ${reason}`)
+}
+console.log()
 console.log(
   `Outline: ${outline.questions} questions, ${outline.choice} choice, ${outline.scale} scale, ${outline.yesno} yes/no, ${outline.outcomes} outcomes`,
 )
+
+for (const invalidSave of [
+  '{"answers":[{"kind":"scale","value":"five"}]}',
+  "{",
+]) {
+  try {
+    loadSavedGame(invalidSave)
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message)
+  }
+}
+
+for (const invalidSettings of ['{"name":7}', "{"]) {
+  try {
+    loadSettings(invalidSettings)
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message)
+  }
+}

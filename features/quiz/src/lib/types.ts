@@ -59,6 +59,6 @@ interface YesNoAnswer {
 export type Answer = ChoiceAnswer | ScaleAnswer | YesNoAnswer
 
 export interface Settings {
-  showPoints: boolean
-  nickname?: string
+  name: string
+  hints?: boolean
 }

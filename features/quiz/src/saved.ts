@@ -19,6 +19,6 @@ export const savedGame = JSON.stringify({
 })
 
 export const savedSettings = JSON.stringify({
-  showPoints: true,
-  nickname: "Sam",
+  name: "Sam",
+  hints: false,
 } satisfies Settings)

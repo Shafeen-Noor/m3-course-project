@@ -1,6 +1,6 @@
 export { quiz } from "./data.ts"
 export { loadSavedGame, loadSettings } from "./lib/load.ts"
-export { award, recap, show } from "./lib/quiz.ts"
+export { recap, show } from "./lib/quiz.ts"
 export { Session } from "./lib/session.ts"
 export { buildOutline } from "./outline/outline.ts"
 export { savedGame, savedSettings } from "./saved.ts"

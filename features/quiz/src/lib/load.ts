@@ -18,11 +18,11 @@ export function loadSavedGame(saved: string): SavedGame {
   try {
     value = JSON.parse(saved)
   } catch {
-    throw new Error("Invalid save file")
+    throw new Error("Saved game is not valid text")
   }
 
   if (!isSavedGame(value)) {
-    throw new Error("Invalid save structure")
+    throw new Error("Saved game has an invalid structure")
   }
 
   return value
@@ -52,11 +52,11 @@ export function loadSettings(saved: string): Settings {
   try {
     value = JSON.parse(saved)
   } catch {
-    throw new Error("Invalid settings file")
+    throw new Error("Saved settings are not valid text")
   }
 
   if (!isSettings(value)) {
-    throw new Error("Invalid settings structure")
+    throw new Error("Saved settings have an invalid structure")
   }
 
   return value
@@ -64,13 +64,11 @@ export function loadSettings(saved: string): Settings {
 
 export function isSettings(value: unknown): value is Settings {
   if (typeof value !== "object" || value === null) return false
-  if (!("showPoints" in value) || typeof value.showPoints !== "boolean") {
-    return false
-  }
+  if (!("name" in value) || typeof value.name !== "string") return false
   return !(
-    "nickname" in value &&
-    value.nickname !== undefined &&
-    typeof value.nickname !== "string"
+    "hints" in value &&
+    value.hints !== undefined &&
+    typeof value.hints !== "boolean"
   )
 }
 

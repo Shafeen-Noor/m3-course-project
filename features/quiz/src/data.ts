@@ -49,4 +49,4 @@ const questions: Question[] = [
   },
 ]
 
-export const quiz: Quiz = { outcomes, questions }
+export const quiz: Readonly<Quiz> = { outcomes, questions }
