@@ -1,0 +1,22 @@
+{
+  "name": "@app/cli",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "tsc",
+    "lint-eslint": "eslint .",
+    "lint-prettier": "prettier --check .",
+    "start": "node --experimental-strip-types src/index.ts"
+  },
+  "dependencies": {
+    "@platform/quiz": "workspace:*"
+  },
+  "devDependencies": {
+    "@platform/tooling": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,9 +1,16 @@
-import { type Answer, type Choice } from "./types.ts"
+import {
+  type Answer,
+  type Choice,
+  type OutcomeId,
+  type Settings,
+} from "./types.ts"
 
 export interface SavedGame {
   answers: Answer[]
   startedAt?: string
 }
+
+const outcomeIds: OutcomeId[] = ["focus", "balance", "recharge", "explore"]
 
 export function loadSavedGame(saved: string): SavedGame {
   let value: unknown
@@ -11,44 +18,65 @@ export function loadSavedGame(saved: string): SavedGame {
   try {
     value = JSON.parse(saved)
   } catch {
-    throw new Error("Invalid save file.")
+    throw new Error("Invalid save file")
   }
 
   if (!isSavedGame(value)) {
-    throw new Error("Invalid save structure.")
+    throw new Error("Invalid save structure")
   }
 
   return value
 }
 
-function isSavedGame(value: unknown): value is SavedGame {
-  if (typeof value !== "object" || value === null) {
-    return false
-  }
+export function isSavedGame(value: unknown): value is SavedGame {
+  if (typeof value !== "object" || value === null) return false
 
   if (
     !("answers" in value) ||
     !Array.isArray(value.answers) ||
-    !value.answers.every((answer) => isAnswer(answer))
+    !value.answers.every(isAnswer)
   ) {
     return false
   }
 
-  if ("startedAt" in value && typeof value.startedAt !== "string") {
-    return false
+  return !(
+    "startedAt" in value &&
+    value.startedAt !== undefined &&
+    typeof value.startedAt !== "string"
+  )
+}
+
+export function loadSettings(saved: string): Settings {
+  let value: unknown
+
+  try {
+    value = JSON.parse(saved)
+  } catch {
+    throw new Error("Invalid settings file")
   }
 
-  return true
+  if (!isSettings(value)) {
+    throw new Error("Invalid settings structure")
+  }
+
+  return value
+}
+
+export function isSettings(value: unknown): value is Settings {
+  if (typeof value !== "object" || value === null) return false
+  if (!("showPoints" in value) || typeof value.showPoints !== "boolean") {
+    return false
+  }
+  return !(
+    "nickname" in value &&
+    value.nickname !== undefined &&
+    typeof value.nickname !== "string"
+  )
 }
 
 function isAnswer(value: unknown): value is Answer {
-  if (typeof value !== "object" || value === null) {
-    return false
-  }
-
-  if (!("kind" in value) || typeof value.kind !== "string") {
-    return false
-  }
+  if (typeof value !== "object" || value === null) return false
+  if (!("kind" in value) || typeof value.kind !== "string") return false
 
   if (value.kind === "choice") {
     return "picked" in value && isChoice(value.picked)
@@ -58,34 +86,23 @@ function isAnswer(value: unknown): value is Answer {
     return (
       "value" in value &&
       typeof value.value === "number" &&
+      Number.isInteger(value.value) &&
       value.value >= 1 &&
       value.value <= 5
     )
   }
 
-  if (value.kind === "yesno") {
-    return "value" in value && typeof value.value === "boolean"
-  }
-
-  return false
+  return (
+    value.kind === "yesno" &&
+    "value" in value &&
+    typeof value.value === "boolean"
+  )
 }
 
 function isChoice(value: unknown): value is Choice {
-  if (typeof value !== "object" || value === null) {
-    return false
-  }
-
-  if (!("label" in value) || typeof value.label !== "string") {
-    return false
-  }
-
-  if (!("outcome" in value) || typeof value.outcome !== "string") {
-    return false
-  }
-
-  if (!("points" in value) || typeof value.points !== "number") {
-    return false
-  }
-
-  return true
+  if (typeof value !== "object" || value === null) return false
+  if (!("label" in value) || typeof value.label !== "string") return false
+  if (!("outcome" in value) || typeof value.outcome !== "string") return false
+  if (!("points" in value) || typeof value.points !== "number") return false
+  return outcomeIds.includes(value.outcome as OutcomeId)
 }

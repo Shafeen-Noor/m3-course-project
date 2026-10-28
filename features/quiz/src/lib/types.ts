@@ -1,4 +1,4 @@
-export type OutcomeId = "spaghetti" | "penne" | "farfalle" | "ravioli"
+export type OutcomeId = "focus" | "balance" | "recharge" | "explore"
 
 export interface Quiz {
   outcomes: Outcome[]
@@ -9,6 +9,12 @@ export interface Outcome {
   id: OutcomeId
   title: string
   description: string
+}
+
+export interface Choice {
+  label: string
+  outcome: OutcomeId
+  points: number
 }
 
 interface BaseQuestion {
@@ -52,8 +58,7 @@ interface YesNoAnswer {
 
 export type Answer = ChoiceAnswer | ScaleAnswer | YesNoAnswer
 
-export interface Choice {
-  label: string
-  outcome: OutcomeId
-  points: number
+export interface Settings {
+  showPoints: boolean
+  nickname?: string
 }

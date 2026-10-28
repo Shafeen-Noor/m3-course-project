@@ -2,49 +2,50 @@ import { type Outcome, type Question, type Quiz } from "./lib/types.ts"
 
 const outcomes: Outcome[] = [
   {
-    id: "spaghetti",
-    title: "Spaghetti",
-    description: "Classic and dependable, you keep things simple.",
+    id: "focus",
+    title: "Focus Mode",
+    description: "A quiet place and one task at a time may work best.",
   },
   {
-    id: "penne",
-    title: "Penne",
-    description: "Practical and direct, you get things done.",
+    id: "balance",
+    title: "Balanced Mode",
+    description: "A steady mix of focused work and short breaks should fit.",
   },
   {
-    id: "farfalle",
-    title: "Farfalle",
-    description: "Playful and light, you like to go with the flow.",
+    id: "recharge",
+    title: "Recharge Mode",
+    description: "A lighter session with room to rest could help today.",
   },
   {
-    id: "ravioli",
-    title: "Ravioli",
-    description: "Full of surprises, you keep people guessing.",
+    id: "explore",
+    title: "Explore Mode",
+    description: "Try a new topic or a different way to study today.",
   },
 ]
 
 const questions: Question[] = [
   {
     kind: "choice",
-    label: "How do you like your Sunday?",
-    hint: "There is no wrong answer.",
+    label: "What would help you get started?",
+    hint: "Choose the option that sounds useful today.",
     choices: [
-      { label: "Cooking for friends", outcome: "ravioli", points: 3 },
-      { label: "Reading with a blanket", outcome: "spaghetti", points: 1 },
-      { label: "A long walk", outcome: "penne", points: 2 },
+      { label: "A quiet desk", outcome: "focus", points: 3 },
+      { label: "A short plan with breaks", outcome: "balance", points: 3 },
+      { label: "A slower start", outcome: "recharge", points: 3 },
+      { label: "A new topic", outcome: "explore", points: 3 },
     ],
   },
   {
     kind: "scale",
-    label: "How much do you enjoy trying new things?",
-    low: "not at all",
+    label: "How much energy do you have?",
+    low: "very little",
     high: "a lot",
-    outcome: "farfalle",
+    outcome: "recharge",
   },
   {
     kind: "yesno",
-    label: "Do you plan trips in advance?",
-    outcome: "penne",
+    label: "Would a short break help you stay on track?",
+    outcome: "balance",
   },
 ]
 
