@@ -36,7 +36,9 @@ for (const [index, question] of quiz.entries()) {
   console.log(show(question, settings))
   console.log(recap(question, answer))
   if (settings.showPoints)
-    console.log(`${result.points} points for ${result.outcome}`)
+    console.log(
+      `${result.points} ${result.points === 1 ? "point" : "points"} for ${result.outcome}`,
+    )
 }
 
 session.finish()
